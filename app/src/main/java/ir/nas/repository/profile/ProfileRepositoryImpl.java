@@ -9,7 +9,7 @@ import jakarta.persistence.TypedQuery;
 public final class ProfileRepositoryImpl extends ProfileRepository
 {
     @Override
-    public Optional<Profile> findByEmail(final String email)
+    public Optional<Profile> findProfileByEmail(final String email)
     {
         final String FIND_PROFILE_BY_EMAIL_QUERY_STRING = "FROM Profile p WHERE p.email = :profile_email";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {
@@ -25,7 +25,7 @@ public final class ProfileRepositoryImpl extends ProfileRepository
     }
 
     @Override
-    public Optional<Profile> findByUsername(final String username)
+    public Optional<Profile> findProfileByUsername(final String username)
     {
         final String FIND_PROFILE_BY_USERNAME_QUERY_STRING = "FROM Profile p WHERE p.username = :profile_username";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {

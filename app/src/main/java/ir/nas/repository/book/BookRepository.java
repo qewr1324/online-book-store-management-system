@@ -12,7 +12,7 @@ public abstract class BookRepository extends RepositoryImpl<Book, Long>
         super(Book.class);
     }
     
-    public abstract Optional<Book> findByTitle(String title);
+    public abstract Optional<Book> findBookByTitle(String title);
     
-    public abstract Optional<Book> findByISBN(String ISBN);
+    public abstract Optional<Book> findBookByISBN(String ISBN);
 }

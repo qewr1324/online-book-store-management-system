@@ -9,7 +9,7 @@ import jakarta.persistence.TypedQuery;
 public class AuthorRepositoryImpl extends AuthorRepository
 {
     @Override
-    public Optional<Author> findByFirstName(final String firstName)
+    public Optional<Author> findAuthorByFirstName(final String firstName)
     {
         final String FIND_AUTHOR_BY_FIRST_NAME_QUERY_STRING = "FROM Author a WHERE a.firstName = :author_firstname";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {
@@ -25,7 +25,7 @@ public class AuthorRepositoryImpl extends AuthorRepository
     }
 
     @Override
-    public Optional<Author> findByLastName(String lastName)
+    public Optional<Author> findAuthorByLastName(String lastName)
     {
         final String FIND_AUTHOR_BY_LAST_NAME_QUERY_STRING = "FROM Author a WHERE a.lastName = :author_lastname";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {
@@ -41,7 +41,7 @@ public class AuthorRepositoryImpl extends AuthorRepository
     }
 
     @Override
-    public Optional<Author> findByPhoneNumber(String phoneNumber)
+    public Optional<Author> findAuthorByPhoneNumber(String phoneNumber)
     {
         final String FIND_AUTHOR_BY_PHONE_NUMBER_QUERY_STRING = "FROM Author a WHERE a.phoneNumber = :author_phonenumber";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {

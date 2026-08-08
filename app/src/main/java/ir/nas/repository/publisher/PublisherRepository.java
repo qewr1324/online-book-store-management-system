@@ -13,9 +13,9 @@ public abstract class PublisherRepository extends RepositoryImpl<Publisher, Long
         super(Publisher.class);
     }
     
-    public abstract Optional<Publisher> findByCompanyName(String companyName);
+    public abstract Optional<Publisher> findPublisherByCompanyName(String companyName);
     
-    public abstract Optional<Publisher> findByEmail(String email);
+    public abstract Optional<Publisher> findPublisherByEmail(String email);
     
-    public abstract Optional<Publisher> findByNationalId(String nationalId);
+    public abstract Optional<Publisher> findPublisherByNationalId(String nationalId);
 }

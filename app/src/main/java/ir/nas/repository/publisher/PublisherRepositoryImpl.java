@@ -9,7 +9,7 @@ import jakarta.persistence.TypedQuery;
 public class PublisherRepositoryImpl extends PublisherRepository
 {
     @Override
-    public Optional<Publisher> findByCompanyName(final String companyName)
+    public Optional<Publisher> findPublisherByCompanyName(final String companyName)
     {
         final String FIND_PUBLISHER_BY_COMPANY_NAME_QUERY_STRING = "FROM Publisher p WHERE p.companyName = :publisher_companyname";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {
@@ -25,7 +25,7 @@ public class PublisherRepositoryImpl extends PublisherRepository
     }
 
     @Override
-    public Optional<Publisher> findByEmail(final String email)
+    public Optional<Publisher> findPublisherByEmail(final String email)
     {
         final String FIND_PUBLISHER_BY_EMAIL_QUERY_STRING = "FROM Publisher p WHERE p.email = :publisher_email";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {
@@ -41,7 +41,7 @@ public class PublisherRepositoryImpl extends PublisherRepository
     }
 
     @Override
-    public Optional<Publisher> findByNationalId(final String nationalId)
+    public Optional<Publisher> findPublisherByNationalId(final String nationalId)
     {
         final String FIND_PUBLISHER_BY_NATIONAL_ID_QUERY_STRING = "FROM Publisher p WHERE p.nationalId = :publisher_nationalid";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {

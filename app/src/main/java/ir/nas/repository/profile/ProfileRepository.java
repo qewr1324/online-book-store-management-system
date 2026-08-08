@@ -12,7 +12,7 @@ public abstract class ProfileRepository extends RepositoryImpl<Profile, Long>
         super(Profile.class);
     }
 
-    public abstract Optional<Profile> findByEmail(String email);
+    public abstract Optional<Profile> findProfileByEmail(String email);
 
-    public abstract Optional<Profile> findByUsername(String username);
+    public abstract Optional<Profile> findProfileByUsername(String username);
 }

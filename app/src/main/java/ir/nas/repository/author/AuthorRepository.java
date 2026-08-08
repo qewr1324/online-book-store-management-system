@@ -12,9 +12,9 @@ public abstract class AuthorRepository extends RepositoryImpl<Author, Long>
         super(Author.class);
     }
     
-    public abstract Optional<Author> findByFirstName(String firstName);
+    public abstract Optional<Author> findAuthorByFirstName(String firstName);
     
-    public abstract Optional<Author> findByLastName(String lastName);
+    public abstract Optional<Author> findAuthorByLastName(String lastName);
 
-    public abstract Optional<Author> findByPhoneNumber(String phoneNumber);
+    public abstract Optional<Author> findAuthorByPhoneNumber(String phoneNumber);
 }

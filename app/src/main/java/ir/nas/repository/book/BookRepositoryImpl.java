@@ -9,7 +9,7 @@ import jakarta.persistence.TypedQuery;
 public final class BookRepositoryImpl extends BookRepository
 {
     @Override
-    public Optional<Book> findByISBN(final String ISBN)
+    public Optional<Book> findBookByISBN(final String ISBN)
     {
         final String FIND_BOOK_BY_ISBN_QUERY_STRING = "FROM Book b WHERE b.ISBN = :book_isbn";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {
@@ -25,7 +25,7 @@ public final class BookRepositoryImpl extends BookRepository
     }
 
     @Override
-    public Optional<Book> findByTitle(final String title)
+    public Optional<Book> findBookByTitle(final String title)
     {
         final String FIND_BOOK_BY_ISBN_QUERY_STRING = "FROM Book b WHERE b.title = :book_title";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {
