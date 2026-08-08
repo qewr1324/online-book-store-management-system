@@ -1,12 +1,14 @@
 package ir.nas.exception.db;
 
+import ir.nas.util.ColorCMD;
+
 /**
  * DBConnectionException
  */
 public class DBConnectionException extends RuntimeException
 {
-    public DBConnectionException(String message)
+    public DBConnectionException(final String message)
     {
-        super(message);
+        super(ColorCMD.dbError(message));
     }
 }
