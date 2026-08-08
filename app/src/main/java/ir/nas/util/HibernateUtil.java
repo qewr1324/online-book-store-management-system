@@ -1,6 +1,9 @@
 package ir.nas.util;
 
+import java.util.List;
 import java.util.function.Function;
+
+import org.glassfish.jaxb.core.v2.model.core.ID;
 
 import ir.nas.exception.db.DBConnectionException;
 import ir.nas.model.BaseModel;
@@ -9,6 +12,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceException;
+import jakarta.persistence.TypedQuery;
 
 public final class HibernateUtil
 {
@@ -23,9 +27,22 @@ public final class HibernateUtil
             emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME_STRING);
     }
 
-    public synchronized static final HibernateUtil of()
+    public synchronized static final <T> T startWithTx(final Function<EntityManager, T> function)
     {
-        return new HibernateUtil();
+        return new HibernateUtil().returnWithTX(function);
+    }
+
+    public synchronized static final <T extends BaseModel<ID>, ID extends Number> T startFind(
+            final Class<T> clazz,
+            final ID id)
+    {
+        return new HibernateUtil().returnObject(clazz, id);
+    }
+
+    public synchronized static final <T extends BaseModel<ID>, ID extends Number> List<T> startWithTList(
+            final Class<T> clazz)
+    {
+        return new HibernateUtil().returnList(clazz);
     }
 
     private synchronized static final EntityManager getEntityManager()
@@ -33,7 +50,7 @@ public final class HibernateUtil
         return emf.createEntityManager();
     }
 
-    public synchronized final <T> T returnWithTX(final Function<EntityManager, T> function)
+    private synchronized final <T> T returnWithTX(final Function<EntityManager, T> function)
     {
         final EntityManager em = getEntityManager();
         final EntityTransaction tx = em.getTransaction();
@@ -57,9 +74,9 @@ public final class HibernateUtil
         }
     }
 
-    public synchronized final <T extends BaseModel<ID>, ID extends Number> T returnObject(
-            final ID id,
-            final Class<T> clazz)
+    private synchronized final <T extends BaseModel<ID>, ID extends Number> T returnObject(
+            final Class<T> clazz,
+            final ID id)
     {
         try (final EntityManager em = getEntityManager()) {
 
@@ -67,6 +84,21 @@ public final class HibernateUtil
 
         } catch (PersistenceException e) {
             throw new DBConnectionException("HibernateUtil Class Error [returnObject()]: "
+                    .concat(e.getMessage()));
+        }
+    }
+
+    private synchronized final <T extends BaseModel<ID>, ID extends Number> List<T> returnList(final Class<T> clazz)
+    {
+        final String FIND_ALL_QUERY_STRING = "FROM ".concat(clazz.getSimpleName());
+
+        try (final EntityManager em = getEntityManager()) {
+
+            TypedQuery<T> typedQuery = em.createQuery(FIND_ALL_QUERY_STRING, clazz);
+            return typedQuery.getResultList();
+
+        } catch (PersistenceException e) {
+            throw new DBConnectionException("HibernateUtil Class Error [returnList()]: "
                     .concat(e.getMessage()));
         }
     }
