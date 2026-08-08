@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,6 +43,13 @@ public abstract class BaseModel<ID extends Number>
         if (this.createdAt == null)
             this.createdAt = LocalDate.now();
 
+        if (this.updateAt == null)
+            this.updateAt = LocalDate.now();
+    }
+
+    @PreUpdate
+    private void preUpdate()
+    {
         if (this.updateAt == null)
             this.updateAt = LocalDate.now();
     }
