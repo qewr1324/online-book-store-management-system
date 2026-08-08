@@ -58,4 +58,9 @@ public final class ColorCMD
     {
         return BG_WHITE.concat(BLACK).concat(message).concat(RESET).concat(BG_BLACK);
     }
+
+    public static final String validationError(final String message)
+    {
+        return BG_RED.concat(message).concat(BG_BLACK);
+    }
 }
