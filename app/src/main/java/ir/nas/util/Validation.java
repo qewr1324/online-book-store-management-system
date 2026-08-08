@@ -29,14 +29,12 @@ public final class Validation
     public final <N extends Number> Validation requireNotNegative(final N number)
     {
         if (!this.isValid || number == null) {
-            this.errorMessage = "Invalid Null Number! -> [%.2f]"
-                    .formatted(number);
+            this.errorMessage = "Invalid Null Number! -> [%.2f]".formatted(number);
             this.isValid = false;
         }
 
         if (!this.isValid || number.doubleValue() < 0) {
-            this.errorMessage = "Invalid Negative Number! -> [%.2f]"
-                    .formatted(number);
+            this.errorMessage = "Invalid Negative Number! -> [%.2f]".formatted(number);
             this.isValid = false;
         }
 
@@ -46,14 +44,27 @@ public final class Validation
     public final <N extends Number> Validation requireNotNegativeZero(final N number)
     {
         if (!this.isValid || number == null) {
-            this.errorMessage = "Invalid Null Number! -> [%.2f]"
-                    .formatted(number);
+            this.errorMessage = "Invalid Null Number! -> [%.2f]".formatted(number);
             this.isValid = false;
         }
 
         if (!this.isValid || number.doubleValue() < 1) {
-            this.errorMessage = "Invalid Zero Or Negative Number! -> [%.2f]"
-                    .formatted(number);
+            this.errorMessage = "Invalid Zero Or Negative Number! -> [%.2f]".formatted(number);
+            this.isValid = false;
+        }
+
+        return this;
+    }
+
+    public final Validation requireString(final String input)
+    {
+        if (!this.isValid || input == null) {
+            this.errorMessage = "Invalid Null String! -> [%s]".formatted(input);
+            this.isValid = false;
+        }
+
+        if (!this.isValid || input.isBlank()) {
+            this.errorMessage = "Invalid Blank String! -> [%s]".formatted(input);
             this.isValid = false;
         }
 
@@ -63,8 +74,7 @@ public final class Validation
     public final Validation requireTrueLength(final String input, final int minLength)
     {
         if (!this.isValid || input == null) {
-            this.errorMessage = "Invalid Null String! -> [%s]"
-                    .formatted(input);
+            this.errorMessage = "Invalid Null String! -> [%s]".formatted(input);
             this.isValid = false;
         }
 

@@ -3,9 +3,11 @@ package ir.nas.service;
 import java.util.List;
 
 import ir.nas.exception.repository.ModelNotFoundException;
+import ir.nas.model.Author;
 import ir.nas.model.Book;
 import ir.nas.repository.book.BookRepository;
 import ir.nas.repository.book.BookRepositoryImpl;
+import ir.nas.util.Validation;
 
 public final class BookService
 {
@@ -18,12 +20,19 @@ public final class BookService
 
     private final void validateBook(final Book book)
     {
-        // TODO validate
+        Validation.of()
+                .requireNotNull(book)
+                .requireString(book.getTitle())
+                .requireString(book.getISBN())
+                .requireNotNegative(book.getPrice())
+                .validate();
     }
 
     private final void validateBookId(final Long id)
     {
-        // TODO validate
+        Validation.of()
+                .requireNotNegative(id)
+                .validate();
     }
 
     public final Book addBook(final Book book)

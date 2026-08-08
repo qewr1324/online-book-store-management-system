@@ -6,6 +6,7 @@ import ir.nas.exception.repository.ModelNotFoundException;
 import ir.nas.model.Profile;
 import ir.nas.repository.profile.ProfileRepository;
 import ir.nas.repository.profile.ProfileRepositoryImpl;
+import ir.nas.util.Validation;
 
 public final class ProfileService
 {
@@ -18,12 +19,21 @@ public final class ProfileService
 
     private final void validateProfile(final Profile profile)
     {
-        // TODO validate
+        final int BIOGRAPHY_LENGTH = 500;
+        Validation.of()
+                .requireNotNull(profile)
+                .requireTrueLength(profile.getBiography(), BIOGRAPHY_LENGTH)
+                .requireString(profile.getEmail())
+                .requireString(profile.getUsername())
+                .requireString(profile.getPassword())
+                .validate();
     }
 
     private final void validateProfileId(final Long id)
     {
-        // TODO validate
+        Validation.of()
+                .requireNotNegative(id)
+                .validate();
     }
 
     public final Profile addProfile(final Profile profile)

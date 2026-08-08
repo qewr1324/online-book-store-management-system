@@ -6,6 +6,7 @@ import ir.nas.exception.repository.ModelNotFoundException;
 import ir.nas.model.Publisher;
 import ir.nas.repository.publisher.PublisherRepository;
 import ir.nas.repository.publisher.PublisherRepositoryImpl;
+import ir.nas.util.Validation;
 
 public final class PublisherService
 {
@@ -18,12 +19,27 @@ public final class PublisherService
 
     private final void validatePublisher(final Publisher publisher)
     {
-        // TODO validate
+        Validation.of()
+                .requireNotNull(publisher)
+                .requireString(publisher.getCompanyName())
+                .requireString(publisher.getEmail())
+                .requireString(publisher.getNationalId())
+                .requireString(publisher.getWebsite())
+                .requireNotNull(publisher.getCompanyType())
+                .requireNotNull(publisher.getRegisterDate())
+                .requireNotNull(publisher.getAddress())
+                .requireString(publisher.getAddress().getCountry())
+                .requireString(publisher.getAddress().getProvince())
+                .requireString(publisher.getAddress().getCity())
+                .requireString(publisher.getAddress().getPostalCode())
+                .validate();
     }
 
     private final void validatePublisherId(final Long id)
     {
-        // TODO validate
+        Validation.of()
+                .requireNotNegative(id)
+                .validate();
     }
 
     public final Publisher addPublisher(final Publisher auhtor)

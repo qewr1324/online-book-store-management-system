@@ -6,6 +6,7 @@ import ir.nas.exception.repository.ModelNotFoundException;
 import ir.nas.model.Author;
 import ir.nas.repository.author.AuthorRepository;
 import ir.nas.repository.author.AuthorRepositoryImpl;
+import ir.nas.util.Validation;
 
 public final class AuthorService
 {
@@ -18,12 +19,27 @@ public final class AuthorService
 
     private final void validateAuthor(final Author auhtor)
     {
-        // TODO validate
+        final int PHONE_NUMBER_LENGTH = 11;
+        Validation.of()
+                .requireNotNull(auhtor)
+                .requireString(auhtor.getFirstName())
+                .requireString(auhtor.getLastName())
+                .requireString(auhtor.getPhoneNumber())
+                .requireNotNegative(auhtor.getAge())
+                .requireTrueLength(auhtor.getPhoneNumber(), PHONE_NUMBER_LENGTH)
+                .requireNotNull(auhtor.getAddress())
+                .requireString(auhtor.getAddress().getCountry())
+                .requireString(auhtor.getAddress().getProvince())
+                .requireString(auhtor.getAddress().getCity())
+                .requireString(auhtor.getAddress().getPostalCode())
+                .validate();
     }
 
     private final void validateAuthorId(final Long id)
     {
-        // TODO validate
+        Validation.of()
+                .requireNotNegative(id)
+                .validate();
     }
 
     public final Author addAuthor(final Author auhtor)
