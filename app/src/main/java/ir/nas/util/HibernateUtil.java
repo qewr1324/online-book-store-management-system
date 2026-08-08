@@ -45,6 +45,11 @@ public final class HibernateUtil
         return new HibernateUtil().returnList(clazz);
     }
 
+    public synchronized static final <T extends BaseModel<ID>, ID extends Number> T startWithQuery(final Function<EntityManager, T> function)
+    {
+        return new HibernateUtil().returnWithQuery(function);
+    }
+
     private synchronized static final EntityManager getEntityManager()
     {
         return emf.createEntityManager();
@@ -97,6 +102,16 @@ public final class HibernateUtil
             TypedQuery<T> typedQuery = em.createQuery(FIND_ALL_QUERY_STRING, clazz);
             return typedQuery.getResultList();
 
+        } catch (PersistenceException e) {
+            throw new DBConnectionException("HibernateUtil Class Error [returnList()]: "
+                    .concat(e.getMessage()));
+        }
+    }
+
+    private synchronized final <T extends BaseModel<ID>, ID extends Number> T returnWithQuery(final Function<EntityManager, T> function)
+    {
+        try (final EntityManager em = getEntityManager()) {
+            return function.apply(em);
         } catch (PersistenceException e) {
             throw new DBConnectionException("HibernateUtil Class Error [returnList()]: "
                     .concat(e.getMessage()));

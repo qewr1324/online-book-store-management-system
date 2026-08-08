@@ -9,9 +9,9 @@ public interface Repository<T extends BaseModel<ID>, ID extends Number>
 {
     T create(T t);
 
-    Optional<T> read(ID id);
+    Optional<T> findById(ID id);
 
-    boolean update(T t);
+    T update(T t);
 
     T delete(ID id);
 

@@ -49,8 +49,24 @@ public abstract class RepositoryImpl<T extends BaseModel<ID>, ID extends Number>
     }
 
     @Override
-    public Optional<T> read(ID id)
+    public Optional<T> findById(ID id)
     {
         return Optional.ofNullable(HibernateUtil.startFind(clazz, id));
     }
+
+    @Override
+    public T update(T t)
+    {
+        return HibernateUtil.startWithTx(em -> {
+            T findedT = em.find(clazz, t.getId());
+
+            if (findedT == null)
+                throw new ModelNotFoundException("RepositoryImpl Class Error [update()]: %s Model Not Found!"
+                        .formatted(clazz.getSimpleName()));
+
+            return this.updateSetter(findedT, t);
+        });
+    }
+
+    public abstract T updateSetter(final T src, final T target);
 }
