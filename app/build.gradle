@@ -28,8 +28,8 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.7.4'
     
     // 3. Lombok (برای کاهش کدهای تکراری)
-    compileOnly 'org.projectlombok:lombok:1.18.36'
-    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    compileOnly 'org.projectlombok:lombok:1.18.46'
+    annotationProcessor 'org.projectlombok:lombok:1.18.46'
     
     // (اختیاری) برای تست با Lombok
     testCompileOnly 'org.projectlombok:lombok:1.18.36'
