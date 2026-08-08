@@ -57,7 +57,7 @@ public class AuthorRepositoryImpl extends AuthorRepository
     }
 
     @Override
-    public Author updateSetter(Author src, Author target)
+    public Author updateAllSetter(Author src, Author target)
     {
         src.setFirstName(target.getFirstName());
         src.setLastName(target.getLastName());

@@ -41,7 +41,7 @@ public final class BookRepositoryImpl extends BookRepository
     }
 
     @Override
-    public Book updateSetter(final Book src, final Book target)
+    public Book updateAllSetter(final Book src, final Book target)
     {
         src.setTitle(target.getTitle());
         src.setISBN(target.getISBN());

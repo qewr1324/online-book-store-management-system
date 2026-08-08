@@ -11,7 +11,7 @@ public final class ProfileRepositoryImpl extends ProfileRepository
     @Override
     public Optional<Profile> findByEmail(final String email)
     {
-        final String FIND_PROFILE_BY_EMAIL_QUERY_STRING = "FROM Profile b WHERE b.email = :profile_email";
+        final String FIND_PROFILE_BY_EMAIL_QUERY_STRING = "FROM Profile p WHERE p.email = :profile_email";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {
 
             TypedQuery<Profile> findedProfile = em.createQuery(
@@ -27,7 +27,7 @@ public final class ProfileRepositoryImpl extends ProfileRepository
     @Override
     public Optional<Profile> findByUsername(final String username)
     {
-        final String FIND_PROFILE_BY_USERNAME_QUERY_STRING = "FROM Profile b WHERE b.username = :profile_username";
+        final String FIND_PROFILE_BY_USERNAME_QUERY_STRING = "FROM Profile p WHERE p.username = :profile_username";
         return Optional.ofNullable(HibernateUtil.startWithQuery(em -> {
 
             TypedQuery<Profile> findedProfile = em.createQuery(
@@ -41,7 +41,7 @@ public final class ProfileRepositoryImpl extends ProfileRepository
     }
 
     @Override
-    public Profile updateSetter(final Profile src, final Profile target)
+    public Profile updateAllSetter(final Profile src, final Profile target)
     {
         src.setBiography(target.getBiography());
         src.setEmail(target.getEmail());
