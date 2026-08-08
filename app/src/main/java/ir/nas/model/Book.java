@@ -1,10 +1,14 @@
 package ir.nas.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import ir.nas.model.base.BaseModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -36,6 +40,9 @@ public class Book extends BaseModel<Long>
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal price;
 
-    // TODO publisher
-    // TODO authors
+    @ManyToMany
+    private List<Author> authors;
+
+    @ManyToOne
+    private Publisher publisher;
 }

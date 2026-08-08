@@ -1,9 +1,14 @@
 package ir.nas.model;
 
+import java.util.List;
+
 import ir.nas.model.base.BaseModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -38,7 +43,9 @@ public class Profile extends BaseModel<Long>
     @Column(nullable = false, unique = true, length = 20)
     private String password;
 
-    // TODO author
-    // TODO book
-    // TODO publisher
+    @OneToOne (mappedBy = "profile")
+    private Author author;
+
+    @OneToMany
+    private List<Book> books;
 }

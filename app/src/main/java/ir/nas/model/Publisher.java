@@ -1,6 +1,7 @@
 package ir.nas.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import ir.nas.model.base.BaseModel;
 import ir.nas.model.embeddable.Address;
@@ -10,6 +11,7 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -51,5 +53,11 @@ public class Publisher extends BaseModel<Long>
     private String website;
 
     @Embedded
-    Address address;
+    private Address address;
+
+    @OneToMany (mappedBy = "publisher")
+    private List<Book> books;
+
+    @OneToMany (mappedBy = "publisher")
+    private List<Author> authors; 
 }

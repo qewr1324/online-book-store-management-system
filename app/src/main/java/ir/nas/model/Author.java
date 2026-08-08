@@ -1,11 +1,15 @@
 package ir.nas.model;
 
+import java.util.List;
+
 import ir.nas.model.base.BaseModel;
 import ir.nas.model.embeddable.Address;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -43,7 +47,12 @@ public class Author extends BaseModel<Long>
     @Embedded
     private Address address;
 
-    // TODO book
-    // TODO publisher
-    // TODO profile
+    @ManyToMany (mappedBy = "authors")
+    private List<Book> books;
+
+    @ManyToOne
+    private Publisher publisher;
+
+    @OneToOne
+    private Profile profile;
 }
