@@ -3,7 +3,7 @@ package ir.nas.repository;
 import java.util.List;
 import java.util.Optional;
 
-import ir.nas.model.BaseModel;
+import ir.nas.model.base.BaseModel;
 
 public interface Repository<T extends BaseModel<ID>, ID extends Number>
 {

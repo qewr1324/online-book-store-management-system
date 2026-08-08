@@ -1,4 +1,4 @@
-package ir.nas.model;
+package ir.nas.model.enums;
 
 /**
  * CompanyType

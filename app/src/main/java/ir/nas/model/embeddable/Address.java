@@ -1,4 +1,4 @@
-package ir.nas.model;
+package ir.nas.model.embeddable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

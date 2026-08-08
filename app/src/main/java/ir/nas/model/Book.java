@@ -2,6 +2,7 @@ package ir.nas.model;
 
 import java.math.BigDecimal;
 
+import ir.nas.model.base.BaseModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.SequenceGenerator;

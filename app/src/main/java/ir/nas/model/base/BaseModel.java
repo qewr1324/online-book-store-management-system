@@ -1,4 +1,4 @@
-package ir.nas.model;
+package ir.nas.model.base;
 
 import java.time.LocalDate;
 

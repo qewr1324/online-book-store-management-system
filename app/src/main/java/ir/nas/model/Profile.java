@@ -1,5 +1,6 @@
 package ir.nas.model;
 
+import ir.nas.model.base.BaseModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;

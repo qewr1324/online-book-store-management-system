@@ -6,7 +6,7 @@ import java.util.function.Function;
 import org.glassfish.jaxb.core.v2.model.core.ID;
 
 import ir.nas.exception.db.DBConnectionException;
-import ir.nas.model.BaseModel;
+import ir.nas.model.base.BaseModel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;

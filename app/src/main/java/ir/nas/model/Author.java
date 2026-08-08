@@ -1,5 +1,7 @@
 package ir.nas.model;
 
+import ir.nas.model.base.BaseModel;
+import ir.nas.model.embeddable.Address;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;

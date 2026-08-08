@@ -2,6 +2,9 @@ package ir.nas.model;
 
 import java.time.LocalDate;
 
+import ir.nas.model.base.BaseModel;
+import ir.nas.model.embeddable.Address;
+import ir.nas.model.enums.CompanyType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import ir.nas.exception.repository.ModelNotFoundException;
-import ir.nas.model.BaseModel;
+import ir.nas.model.base.BaseModel;
 import ir.nas.util.HibernateUtil;
 
 public abstract class RepositoryImpl<T extends BaseModel<ID>, ID extends Number> implements Repository<T, ID>
