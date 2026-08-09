@@ -78,9 +78,37 @@ public final class Validation
             this.isValid = false;
         }
 
+        if (!this.isValid || input.isBlank()) {
+            this.errorMessage = "Invalid Blank String! -> [%s]".formatted(input);
+            this.isValid = false;
+        }
+
         if (!this.isValid || input.length() < minLength) {
             this.errorMessage = "Invalid less Than %d Length String! -> [%s]"
                     .formatted(minLength, input);
+            this.isValid = false;
+        }
+
+        return this;
+    }
+
+    public final Validation requirePostalCode(final String input)
+    {
+        final int POSTAL_CODE_LENGTH = 10;
+
+        if (!this.isValid || input == null) {
+            this.errorMessage = "Invalid Null String! -> [%s]".formatted(input);
+            this.isValid = false;
+        }
+
+        if (!this.isValid || input.isBlank()) {
+            this.errorMessage = "Invalid Blank String! -> [%s]".formatted(input);
+            this.isValid = false;
+        }
+
+        if (!this.isValid || input.length() < POSTAL_CODE_LENGTH) {
+            this.errorMessage = "Invalid less Than %d Length String! -> [%s]"
+                    .formatted(POSTAL_CODE_LENGTH, input);
             this.isValid = false;
         }
 
