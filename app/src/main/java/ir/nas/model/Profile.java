@@ -36,7 +36,7 @@ import lombok.experimental.SuperBuilder;
 public class Profile extends BaseModel<Long>
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "profile_seq_gen")
     private Long id;
 
     @Lob

@@ -36,7 +36,7 @@ import lombok.experimental.SuperBuilder;
 public class Book extends BaseModel<Long>
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_seq_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq_gen")
     private Long id;
 
     @Column(nullable = false, length = 50, unique = true)
