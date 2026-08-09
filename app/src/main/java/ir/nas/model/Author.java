@@ -4,9 +4,13 @@ import java.util.List;
 
 import ir.nas.model.base.BaseModel;
 import ir.nas.model.embeddable.Address;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -32,6 +36,10 @@ import lombok.experimental.SuperBuilder;
 @SequenceGenerator(name = "author_seq_gen", sequenceName = "author_seq_gen", initialValue = 0, allocationSize = 1)
 public class Author extends BaseModel<Long>
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_seq_gen")
+    private Long id;
+
     @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
 

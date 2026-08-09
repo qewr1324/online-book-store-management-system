@@ -3,8 +3,12 @@ package ir.nas.model;
 import java.util.List;
 
 import ir.nas.model.base.BaseModel;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -31,6 +35,10 @@ import lombok.experimental.SuperBuilder;
 @SequenceGenerator(name = "profile_seq_gen", sequenceName = "profile_seq_gen", initialValue = 0, allocationSize = 1)
 public class Profile extends BaseModel<Long>
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_seq_gen")
+    private Long id;
+
     @Lob
     private String biography;
 

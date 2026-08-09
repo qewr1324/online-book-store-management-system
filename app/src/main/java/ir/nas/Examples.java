@@ -82,7 +82,7 @@ public final class Examples
             .phoneNumber("09121234567")
             .age(45)
             .address(addressValiasr)
-            .publisher(publisher1)
+            // .publisher(publisher1)
             .build();
 
     public final Author author2 = Author.builder()
@@ -91,7 +91,7 @@ public final class Examples
             .phoneNumber("09129876543")
             .age(38)
             .address(addressShiraz)
-            .publisher(publisher2)
+            // .publisher(publisher2)
             .build();
 
     public final Author author3 = Author.builder()
@@ -100,7 +100,7 @@ public final class Examples
             .phoneNumber("09123334455")
             .age(52)
             .address(addressMashhad)
-            .publisher(publisher2)
+            // .publisher(publisher2)
             .build();
 
     public final Author author4 = Author.builder()
@@ -109,7 +109,7 @@ public final class Examples
             .phoneNumber("09127778899")
             .age(29)
             .address(addressMotehari)
-            .publisher(publisher2)
+            // .publisher(publisher2)
             .build();
 
     public final Profile profile1 = Profile.builder()
@@ -118,7 +118,7 @@ public final class Examples
             .email("a.rezaee@email.com")
             .username("alirezaee")
             .password("Reza@1234")
-            .author(author1)
+            // .author(author1)
             .build();
 
     public final Profile profile2 = Profile.builder()
@@ -127,7 +127,7 @@ public final class Examples
             .email("s.karimi@email.com")
             .username("sarak")
             .password("Sara#5678")
-            .author(author2)
+            // .author(author2)
             .build();
 
     public final Profile profile3 = Profile.builder()
@@ -136,7 +136,7 @@ public final class Examples
             .email("m.norouzi@email.com")
             .username("mohammadn")
             .password("Moha*9012")
-            .author(author3)
+            // .author(author3)
             .build();
 
     public final Profile profile4 = Profile.builder()
@@ -145,61 +145,61 @@ public final class Examples
             .email("n.ahmadi@email.com")
             .username("narges_a")
             .password("Narges!3456")
-            .author(author4)
+            // .author(author4)
             .build();
 
     public final Book book1 = Book.builder()
             .title("Java Programming Basics")
             .ISBN("978-964-123-001-1")
             .price(new BigDecimal("350000.00"))
-            .publisher(publisher1)
-            .authors(new ArrayList<>(Arrays.asList(author1)))
+            // .publisher(publisher1)
+            // .authors(new ArrayList<>(Arrays.asList(author1)))
             .build();
 
     public final Book book2 = Book.builder()
             .title("Data Structures and Algorithms")
             .ISBN("978-964-123-002-9")
             .price(new BigDecimal("480000.00"))
-            .publisher(publisher1)
-            .authors(new ArrayList<>(Arrays.asList(author1, author2)))
+            // .publisher(publisher1)
+            // .authors(new ArrayList<>(Arrays.asList(author1, author2)))
             .build();
 
     public final Book book3 = Book.builder()
             .title("Secrets of a Rainy Night")
             .ISBN("978-600-456-101-5")
             .price(new BigDecimal("250000.00"))
-            .publisher(publisher2)
-            .authors(new ArrayList<>(Arrays.asList(author2, author4)))
+            // .publisher(publisher2)
+            // .authors(new ArrayList<>(Arrays.asList(author2, author4)))
             .build();
 
     public final Book book4 = Book.builder()
             .title("Wordless Melodies")
             .ISBN("978-600-456-102-3")
             .price(new BigDecimal("190000.00"))
-            .publisher(publisher2) // Publisher 2
-            .authors(new ArrayList<>(Arrays.asList(author3)))
+            // .publisher(publisher2)
+            // .authors(new ArrayList<>(Arrays.asList(author3)))
             .build();
 
     public Examples()
     {
-        // Authors (set profiles)
-        author1.setProfile(profile1);
-        author2.setProfile(profile2);
-        author3.setProfile(profile3);
-        author4.setProfile(profile4);
+        // // Authors (set profiles)
+        // author1.setProfile(profile1);
+        // author2.setProfile(profile2);
+        // author3.setProfile(profile3);
+        // author4.setProfile(profile4);
 
-        // Authors (set books)
-        author1.setBooks(new ArrayList<>(Arrays.asList(book1, book2)));
-        author2.setBooks(new ArrayList<>(Arrays.asList(book2, book3)));
-        author3.setBooks(new ArrayList<>(Arrays.asList(book4)));
-        author4.setBooks(new ArrayList<>(Arrays.asList(book3)));
+        // // Authors (set books)
+        // author1.setBooks(new ArrayList<>(Arrays.asList(book1, book2)));
+        // author2.setBooks(new ArrayList<>(Arrays.asList(book2, book3)));
+        // author3.setBooks(new ArrayList<>(Arrays.asList(book4)));
+        // author4.setBooks(new ArrayList<>(Arrays.asList(book3)));
 
-        // Publishers (set books)
-        publisher1.setBooks(new ArrayList<>(Arrays.asList(book1, book2)));
-        publisher2.setBooks(new ArrayList<>(Arrays.asList(book3, book4)));
+        // // Publishers (set books)
+        // publisher1.setBooks(new ArrayList<>(Arrays.asList(book1, book2)));
+        // publisher2.setBooks(new ArrayList<>(Arrays.asList(book3, book4)));
 
-        // Publishers (set authors)
-        publisher1.setAuthors(new ArrayList<>(Arrays.asList(author1)));
-        publisher2.setAuthors(new ArrayList<>(Arrays.asList(author2, author3, author4)));
+        // // Publishers (set authors)
+        // publisher1.setAuthors(new ArrayList<>(Arrays.asList(author1)));
+        // publisher2.setAuthors(new ArrayList<>(Arrays.asList(author2, author3, author4)));
     }
 }

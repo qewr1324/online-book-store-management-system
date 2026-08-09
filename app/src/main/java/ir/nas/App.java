@@ -10,6 +10,7 @@ import ir.nas.model.Author;
 import ir.nas.model.Book;
 import ir.nas.model.Profile;
 import ir.nas.model.Publisher;
+import ir.nas.model.embeddable.Address;
 import ir.nas.repository.author.AuthorRepositoryImpl;
 import ir.nas.repository.book.BookRepositoryImpl;
 import ir.nas.repository.profile.ProfileRepositoryImpl;
@@ -25,7 +26,7 @@ public class App
     public static void main(String[] args)
     {
         // 0. Cofigs
-        Examples exaples = new Examples();
+        Examples examples = new Examples();
 
         // o Book
         BookRepositoryImpl bookRepositoryImpl = new BookRepositoryImpl();
@@ -48,26 +49,45 @@ public class App
         //      o Their profiles
         //      o 2 publisher
         //      o 4 books
-        Author ali = exaples.author1;
-        Author sara = exaples.author2;
-        Author mohammad = exaples.author3;
+        Address address1 = examples.addressTehran;
+        Address address2 = examples.addressIsfahan;
+        Address address3 = examples.addressMashhad;
+        Address address4 = examples.addressValiasr;
+        Address address5 = examples.addressMotehari;
 
-        Profile aliProfile = exaples.profile1;
-        Profile saraProfile = exaples.profile2;
-        Profile mohammadProfile = exaples.profile3;
+        Author ali = examples.author1;
+        Author sara = examples.author2;
+        Author mohammad = examples.author3;
 
-        Publisher publisher = exaples.publisher1;
-        Publisher publisher2 = exaples.publisher2;
+        Profile aliProfile = examples.profile1;
+        Profile saraProfile = examples.profile2;
+        Profile mohammadProfile = examples.profile3;
 
-        Book book1 = exaples.book1;
-        Book book2 = exaples.book2;
-        Book book3 = exaples.book3;
-        Book book4 = exaples.book4;
+        Publisher publisher = examples.publisher1;
+        Publisher publisher2 = examples.publisher2;
+
+        Book book1 = examples.book1;
+        Book book2 = examples.book2;
+        Book book3 = examples.book3;
+        Book book4 = examples.book4;
 
         // 2. Establish the required relationships
 
         // 3. Persist all objects into the database
         System.out.println(ColorCMD.log("3. Persist all objects into the database"));
+
+        // Book
+        bookService.addBook(book1);
+        bookService.addBook(book2);
+        bookService.addBook(book3);
+        bookService.addBook(book4);
+        System.out.println(ColorCMD.log("Books Added."));
+
+        // Author
+        authorService.addAuthor(ali);
+        authorService.addAuthor(sara);
+        authorService.addAuthor(mohammad);
+        System.out.println(ColorCMD.log("Authors Added."));
 
         // Publisher
         publisherService.addPublisher(publisher);
@@ -80,28 +100,15 @@ public class App
         profileService.addProfile(mohammadProfile);
         System.out.println(ColorCMD.log("Profile Added."));
 
-        // Author
-        authorService.addAuthor(ali);
-        authorService.addAuthor(sara);
-        authorService.addAuthor(mohammad);
-        System.out.println(ColorCMD.log("Authors Added."));
-
-        // Book
-        bookService.addBook(book1);
-        bookService.addBook(book2);
-        bookService.addBook(book3);
-        bookService.addBook(book4);
-        System.out.println(ColorCMD.log("Books Added."));
-
         // 4. Retrieve one book by its ID
         Book findedBook = bookService.findBookById(0L);
-        System.out.println(ColorCMD.log("4. Retrieve one book by its ID: " + findedBook));
+        System.out.println(ColorCMD.log("4. Retrieve one book by its ID: [ID 0]" + findedBook));
 
         // 5. Update some information of the retrieved book (for example: change its price)
-        findedBook.setPrice(new BigDecimal(100000000));
+        findedBook.setPrice(new BigDecimal(2.0));
         System.out.println(ColorCMD.log("""
                 5. Update some information of the retrieved book (for example: change its price)
-                [ID 0 -> price: 100000000]
+                [ID 0 -> price: $2.0]
                 """));
 
         // 6. Save the changes

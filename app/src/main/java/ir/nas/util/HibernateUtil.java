@@ -70,7 +70,7 @@ public final class HibernateUtil
             return obj;
         } catch (PersistenceException e) {
 
-            if (tx.isActive())
+            if (em.isOpen() && tx.isActive())
                 tx.rollback();
 
             e.printStackTrace();

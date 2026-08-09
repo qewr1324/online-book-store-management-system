@@ -20,7 +20,11 @@ public abstract class RepositoryImpl<T extends BaseModel<ID>, ID extends Number>
     public T create(T t)
     {
         return HibernateUtil.startWithTx(em -> {
-            em.persist(t);
+            // !AI - SAVE
+            if (t.getId() == null)
+                em.persist(t);
+            else
+                em.merge(t);
 
             return t;
         });

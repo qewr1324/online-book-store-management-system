@@ -11,6 +11,9 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -34,6 +37,10 @@ import lombok.experimental.SuperBuilder;
 @SequenceGenerator(name = "publisher_seq_gen", sequenceName = "publisher_seq_gen", initialValue = 0, allocationSize = 1)
 public class Publisher extends BaseModel<Long>
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_seq_gen")
+    private Long id;
+
     @Column(name = "company_name", length = 50, nullable = false, unique = true)
     private String companyName;
 

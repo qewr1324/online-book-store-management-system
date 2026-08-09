@@ -4,8 +4,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import ir.nas.model.base.BaseModel;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -31,6 +35,10 @@ import lombok.experimental.SuperBuilder;
 @SequenceGenerator(name = "book_seq_gen", sequenceName = "book_seq_gen", initialValue = 0, allocationSize = 1)
 public class Book extends BaseModel<Long>
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_seq_gen")
+    private Long id;
+
     @Column(nullable = false, length = 50, unique = true)
     private String title;
 

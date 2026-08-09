@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,15 +28,15 @@ import lombok.experimental.SuperBuilder;
 @MappedSuperclass
 public abstract class BaseModel<ID extends Number>
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_gen")
-    private ID id;
-
     @Column(name = "created_at")
     private LocalDate createdAt;
 
     @Column(name = "update_at")
     private LocalDate updateAt;
+
+    public abstract void setId(ID id);
+    
+    public abstract ID getId();
 
     @PrePersist
     private void prepersiste()
