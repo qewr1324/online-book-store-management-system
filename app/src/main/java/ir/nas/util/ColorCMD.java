@@ -24,6 +24,7 @@ public final class ColorCMD
     private static final String BRIGHT_WHITE = "\u001B[97m";
 
     // Background Color
+    private static final String BG_DEFAULT = "\u001B[49m";
     private static final String BG_BLACK = "\u001B[40m";
     private static final String BG_RED = "\u001B[41m";
     private static final String BG_GREEN = "\u001B[42m";
@@ -41,26 +42,31 @@ public final class ColorCMD
 
     public static final String repositoryError(final String message)
     {
-        return BG_CYAN.concat(message).concat(BG_BLACK);
+        return BG_CYAN.concat(message).concat(BG_DEFAULT);
     }
 
     public static final String serviceError(final String message)
     {
-        return BG_BLUE.concat(message).concat(BG_BLACK);
+        return BG_BLUE.concat(message).concat(BG_DEFAULT);
     }
 
     public static final String modelError(final String message)
     {
-        return BG_YELLOW.concat(message).concat(BG_BLACK);
+        return BG_YELLOW.concat(message).concat(BG_DEFAULT);
     }
 
     public static final String dbError(final String message)
     {
-        return BG_WHITE.concat(BLACK).concat(message).concat(RESET).concat(BG_BLACK);
+        return BG_WHITE.concat(BLACK).concat(message).concat(RESET).concat(BG_DEFAULT);
     }
 
     public static final String validationError(final String message)
     {
-        return BG_RED.concat(message).concat(BG_BLACK);
+        return BG_RED.concat(message).concat(BG_DEFAULT);
+    }
+
+    public static final String log(final String message)
+    {
+        return BG_GREEN.concat(message).concat(BG_DEFAULT);
     }
 }

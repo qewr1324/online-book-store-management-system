@@ -17,8 +17,8 @@ public final class HibernateUtil
     private static EntityManagerFactory emf;
     private static final String PERSISTENCE_UNIT_NAME_STRING = "postgresql-unit";
 
-    // private HibernateUtil()
-    // {}
+    private HibernateUtil()
+    {}
 
     static {
         if (emf == null)
@@ -43,7 +43,8 @@ public final class HibernateUtil
         return new HibernateUtil().returnList(clazz);
     }
 
-    public synchronized static final <T extends BaseModel<ID>, ID extends Number> T startWithQuery(final Function<EntityManager, T> function)
+    public synchronized static final <T extends BaseModel<ID>, ID extends Number> T startWithQuery(
+            final Function<EntityManager, T> function)
     {
         return new HibernateUtil().returnWithQuery(function);
     }
@@ -72,6 +73,7 @@ public final class HibernateUtil
             if (tx.isActive())
                 tx.rollback();
 
+            e.printStackTrace();
             throw new DBConnectionException("HibernateUtil Class Error [returnWithTX()]: "
                     .concat(e.getMessage()));
         }
@@ -86,6 +88,7 @@ public final class HibernateUtil
             return em.find(clazz, id);
 
         } catch (PersistenceException e) {
+            e.printStackTrace();
             throw new DBConnectionException("HibernateUtil Class Error [returnObject()]: "
                     .concat(e.getMessage()));
         }
@@ -101,16 +104,19 @@ public final class HibernateUtil
             return typedQuery.getResultList();
 
         } catch (PersistenceException e) {
+            e.printStackTrace();
             throw new DBConnectionException("HibernateUtil Class Error [returnList()]: "
                     .concat(e.getMessage()));
         }
     }
 
-    private synchronized final <T extends BaseModel<ID>, ID extends Number> T returnWithQuery(final Function<EntityManager, T> function)
+    private synchronized final <T extends BaseModel<ID>, ID extends Number> T returnWithQuery(
+            final Function<EntityManager, T> function)
     {
         try (final EntityManager em = getEntityManager()) {
             return function.apply(em);
         } catch (PersistenceException e) {
+            e.printStackTrace();
             throw new DBConnectionException("HibernateUtil Class Error [returnList()]: "
                     .concat(e.getMessage()));
         }

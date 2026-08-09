@@ -24,7 +24,7 @@ import lombok.ToString;
 @Embeddable
 public class Address
 {
-    @Column(length = 20, unique = true, nullable = false)
+    @Column(length = 20, nullable = false)
     private String country;
 
     @Column(length = 20, nullable = false)
@@ -33,6 +33,6 @@ public class Address
     @Column(length = 20, nullable = false)
     private String city;
 
-    @Column(length = 20, unique = true, nullable = false)
+    @Column(length = 10, nullable = false)
     private String postalCode;
 }

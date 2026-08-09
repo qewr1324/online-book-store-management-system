@@ -31,7 +31,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(name = "publishers")
-@SequenceGenerator(name = "seq_gen", sequenceName = "publisher_seq_gen", initialValue = 0, allocationSize = 1)
+@SequenceGenerator(name = "publisher_seq_gen", sequenceName = "publisher_seq_gen", initialValue = 0, allocationSize = 1)
 public class Publisher extends BaseModel<Long>
 {
     @Column(name = "company_name", length = 50, nullable = false, unique = true)
@@ -55,9 +55,13 @@ public class Publisher extends BaseModel<Long>
     @Embedded
     private Address address;
 
-    @OneToMany (mappedBy = "publisher")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "publisher")
     private List<Book> books;
 
-    @OneToMany (mappedBy = "publisher")
-    private List<Author> authors; 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "publisher")
+    private List<Author> authors;
 }

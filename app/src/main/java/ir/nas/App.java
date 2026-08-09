@@ -3,18 +3,123 @@
  */
 package ir.nas;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+import ir.nas.model.Author;
+import ir.nas.model.Book;
+import ir.nas.model.Profile;
+import ir.nas.model.Publisher;
+import ir.nas.repository.author.AuthorRepositoryImpl;
 import ir.nas.repository.book.BookRepositoryImpl;
+import ir.nas.repository.profile.ProfileRepositoryImpl;
+import ir.nas.repository.publisher.PublisherRepositoryImpl;
+import ir.nas.service.AuthorService;
 import ir.nas.service.BookService;
-import ir.nas.util.HibernateUtil;
+import ir.nas.service.ProfileService;
+import ir.nas.service.PublisherService;
+import ir.nas.util.ColorCMD;
 
 public class App
 {
     public static void main(String[] args)
     {
-        System.out.println("Sallam!");
-        
-        HibernateUtil hibernateUtil = new HibernateUtil();
+        // 0. Cofigs
+        Examples exaples = new Examples();
+
+        // o Book
         BookRepositoryImpl bookRepositoryImpl = new BookRepositoryImpl();
-        BookService bService = new BookService(bookRepositoryImpl);
+        BookService bookService = new BookService(bookRepositoryImpl);
+
+        // o Author
+        AuthorRepositoryImpl authorRepositoryImpl = new AuthorRepositoryImpl();
+        AuthorService authorService = new AuthorService(authorRepositoryImpl);
+
+        // o Profile
+        ProfileRepositoryImpl profileRepositoryImpl = new ProfileRepositoryImpl();
+        ProfileService profileService = new ProfileService(profileRepositoryImpl);
+
+        // o Publisher
+        PublisherRepositoryImpl publisherRepositoryImpl = new PublisherRepositoryImpl();
+        PublisherService publisherService = new PublisherService(publisherRepositoryImpl);
+
+        // 1. Create the required entities:
+        //      o At least 3 authors
+        //      o Their profiles
+        //      o 2 publisher
+        //      o 4 books
+        Author ali = exaples.author1;
+        Author sara = exaples.author2;
+        Author mohammad = exaples.author3;
+
+        Profile aliProfile = exaples.profile1;
+        Profile saraProfile = exaples.profile2;
+        Profile mohammadProfile = exaples.profile3;
+
+        Publisher publisher = exaples.publisher1;
+        Publisher publisher2 = exaples.publisher2;
+
+        Book book1 = exaples.book1;
+        Book book2 = exaples.book2;
+        Book book3 = exaples.book3;
+        Book book4 = exaples.book4;
+
+        // 2. Establish the required relationships
+
+        // 3. Persist all objects into the database
+        System.out.println(ColorCMD.log("3. Persist all objects into the database"));
+
+        // Publisher
+        publisherService.addPublisher(publisher);
+        publisherService.addPublisher(publisher2);
+        System.out.println(ColorCMD.log("Publisher Added."));
+
+        // Profile
+        profileService.addProfile(aliProfile);
+        profileService.addProfile(saraProfile);
+        profileService.addProfile(mohammadProfile);
+        System.out.println(ColorCMD.log("Profile Added."));
+
+        // Author
+        authorService.addAuthor(ali);
+        authorService.addAuthor(sara);
+        authorService.addAuthor(mohammad);
+        System.out.println(ColorCMD.log("Authors Added."));
+
+        // Book
+        bookService.addBook(book1);
+        bookService.addBook(book2);
+        bookService.addBook(book3);
+        bookService.addBook(book4);
+        System.out.println(ColorCMD.log("Books Added."));
+
+        // 4. Retrieve one book by its ID
+        Book findedBook = bookService.findBookById(0L);
+        System.out.println(ColorCMD.log("4. Retrieve one book by its ID: " + findedBook));
+
+        // 5. Update some information of the retrieved book (for example: change its price)
+        findedBook.setPrice(new BigDecimal(100000000));
+        System.out.println(ColorCMD.log("""
+                5. Update some information of the retrieved book (for example: change its price)
+                [ID 0 -> price: 100000000]
+                """));
+
+        // 6. Save the changes
+        bookService.updateBook(findedBook);
+        System.out.println(ColorCMD.log("6. Save the changes"));
+
+        // 7. Delete one book
+        bookService.deleteBook(0L);
+        System.out.println(ColorCMD.log("7. Delete one book: [ID 0]"));
+
+        // 8. Display the created objects and their relationships (for example: print to console)
+        System.out.println(ColorCMD.log("""
+                8. Display the created objects and their relationships (for example: print to console)
+                """));
+
+        List<Book> allBook = bookService.findAllBook();
+        ;
+        System.out.println(allBook);
+        // 9. Verify the final database state (by querying and showing results)
     }
 }

@@ -28,7 +28,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(name = "books")
-@SequenceGenerator(name = "seq_gen", sequenceName = "book_seq_gen", initialValue = 0, allocationSize = 1)
+@SequenceGenerator(name = "book_seq_gen", sequenceName = "book_seq_gen", initialValue = 0, allocationSize = 1)
 public class Book extends BaseModel<Long>
 {
     @Column(nullable = false, length = 50, unique = true)
@@ -40,9 +40,13 @@ public class Book extends BaseModel<Long>
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal price;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany
     private List<Author> authors;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     private Publisher publisher;
 }

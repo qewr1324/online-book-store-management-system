@@ -29,7 +29,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(name = "authors")
-@SequenceGenerator(name = "seq_gen", sequenceName = "author_seq_gen", initialValue = 0, allocationSize = 1)
+@SequenceGenerator(name = "author_seq_gen", sequenceName = "author_seq_gen", initialValue = 0, allocationSize = 1)
 public class Author extends BaseModel<Long>
 {
     @Column(name = "first_name", nullable = false, length = 50)
@@ -47,12 +47,18 @@ public class Author extends BaseModel<Long>
     @Embedded
     private Address address;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "authors")
     private List<Book> books;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     private Publisher publisher;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "author")
     private Profile profile;
 }

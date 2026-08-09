@@ -28,7 +28,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Entity
 @Table(name = "profiles")
-@SequenceGenerator(name = "seq_gen", sequenceName = "profile_seq_gen", initialValue = 0, allocationSize = 1)
+@SequenceGenerator(name = "profile_seq_gen", sequenceName = "profile_seq_gen", initialValue = 0, allocationSize = 1)
 public class Profile extends BaseModel<Long>
 {
     @Lob
@@ -43,6 +43,8 @@ public class Profile extends BaseModel<Long>
     @Column(nullable = false, unique = true, length = 20)
     private String password;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToOne
     private Author author;
 }
