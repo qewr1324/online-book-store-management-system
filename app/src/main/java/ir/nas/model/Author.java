@@ -40,19 +40,19 @@ public class Author extends BaseModel<Long>
 
     @Column(name = "phone_Number", nullable = false, length = 11, unique = true)
     private String phoneNumber;
-    
+
     @Column(nullable = false)
     private int age;
 
     @Embedded
     private Address address;
 
-    @ManyToMany (mappedBy = "authors")
+    @ManyToMany(mappedBy = "authors")
     private List<Book> books;
 
     @ManyToOne
     private Publisher publisher;
 
-    @OneToOne
+    @OneToOne(mappedBy = "author")
     private Profile profile;
 }

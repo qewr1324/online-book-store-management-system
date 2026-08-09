@@ -43,9 +43,6 @@ public class Profile extends BaseModel<Long>
     @Column(nullable = false, unique = true, length = 20)
     private String password;
 
-    @OneToOne (mappedBy = "profile")
+    @OneToOne
     private Author author;
-
-    @OneToMany
-    private List<Book> books;
 }

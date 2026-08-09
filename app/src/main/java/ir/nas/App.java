@@ -3,10 +3,18 @@
  */
 package ir.nas;
 
+import ir.nas.repository.book.BookRepositoryImpl;
+import ir.nas.service.BookService;
+import ir.nas.util.HibernateUtil;
+
 public class App
 {
     public static void main(String[] args)
     {
         System.out.println("Sallam!");
+        
+        HibernateUtil hibernateUtil = new HibernateUtil();
+        BookRepositoryImpl bookRepositoryImpl = new BookRepositoryImpl();
+        BookService bService = new BookService(bookRepositoryImpl);
     }
 }

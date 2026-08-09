@@ -3,8 +3,6 @@ package ir.nas.util;
 import java.util.List;
 import java.util.function.Function;
 
-import org.glassfish.jaxb.core.v2.model.core.ID;
-
 import ir.nas.exception.db.DBConnectionException;
 import ir.nas.model.base.BaseModel;
 import jakarta.persistence.EntityManager;
@@ -19,8 +17,8 @@ public final class HibernateUtil
     private static EntityManagerFactory emf;
     private static final String PERSISTENCE_UNIT_NAME_STRING = "postgresql-unit";
 
-    private HibernateUtil()
-    {}
+    // private HibernateUtil()
+    // {}
 
     static {
         if (emf == null)
