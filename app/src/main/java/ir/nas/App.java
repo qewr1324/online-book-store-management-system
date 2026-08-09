@@ -4,8 +4,8 @@
 package ir.nas;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
-
 import ir.nas.model.Author;
 import ir.nas.model.Book;
 import ir.nas.model.Profile;
@@ -44,11 +44,13 @@ public class App
         PublisherRepositoryImpl publisherRepositoryImpl = new PublisherRepositoryImpl();
         PublisherService publisherService = new PublisherService(publisherRepositoryImpl);
 
+        // ------------------------------------------------------------------------------------------
         // 1. Create the required entities:
         //      o At least 3 authors
         //      o Their profiles
         //      o 2 publisher
         //      o 4 books
+        // ------------------------------------------------------------------------------------------
         Address address1 = examples.addressTehran;
         Address address2 = examples.addressIsfahan;
         Address address3 = examples.addressMashhad;
@@ -73,7 +75,9 @@ public class App
 
         // 2. Establish the required relationships
 
-        // 3. Persist all objects into the database
+        // ------------------------------------------------------------------------------------------
+        // 3. Persist all objects into the database--------------------------------------------------
+        // ------------------------------------------------------------------------------------------
         System.out.println(ColorCMD.log("3. Persist all objects into the database"));
 
         // Book
@@ -100,33 +104,115 @@ public class App
         profileService.addProfile(mohammadProfile);
         System.out.println(ColorCMD.log("Profile Added."));
 
-        // 4. Retrieve one book by its ID
+        // ------------------------------------------------------------------------------------------
+        // UPDATE REALEATIONSHIPS--------------------------------------------------------------------
+        // ------------------------------------------------------------------------------------------
+        // Profiles
+        aliProfile.setAuthor(ali);
+        saraProfile.setAuthor(sara);
+        mohammadProfile.setAuthor(mohammad);
+
+        // Authors-Address
+        ali.setAddress(address1);
+        sara.setAddress(address2);
+        mohammad.setAddress(address3);
+
+        // Authors-Profile
+        ali.setProfile(aliProfile);
+        sara.setProfile(saraProfile);
+        mohammad.setProfile(mohammadProfile);
+
+        // Authors-Books
+        ali.setBooks(Arrays.asList(book1, book3));
+        sara.setBooks(Arrays.asList(book1, book3, book4));
+        mohammad.setBooks(Arrays.asList(book1, book2));
+
+        // Authors-Publisher
+        ali.setPublisher(publisher);
+        sara.setPublisher(publisher2);
+        mohammad.setPublisher(publisher2);
+
+        // Books-Authors
+        book1.setAuthors(Arrays.asList(ali, sara, mohammad));
+        book2.setAuthors(Arrays.asList(mohammad));
+        book3.setAuthors(Arrays.asList(ali, sara));
+        book4.setAuthors(Arrays.asList(sara));
+
+        // Books-Publisher
+        book1.setPublisher(publisher);
+        book2.setPublisher(publisher);
+        book3.setPublisher(publisher2);
+        book4.setPublisher(publisher2);
+
+        // Publisher-Address
+        publisher.setAddress(address4);
+        publisher2.setAddress(address5);
+
+        // Publisher-Authors
+        publisher.setAuthors(Arrays.asList(ali));
+        publisher2.setAuthors(Arrays.asList(sara, mohammad));
+
+        // Publisher-Books
+        publisher.setBooks(Arrays.asList(book1, book2));
+        publisher2.setBooks(Arrays.asList(book3, book4));
+
+        // UPDATES-----------------------------------------------------------------------------------
+        bookService.updateBook(book1);
+        bookService.updateBook(book2);
+        bookService.updateBook(book3);
+        bookService.updateBook(book4);
+
+        authorService.updateAuthor(ali);
+        authorService.updateAuthor(sara);
+        authorService.updateAuthor(mohammad);
+
+        profileService.updateProfile(aliProfile);
+        profileService.updateProfile(saraProfile);
+        profileService.updateProfile(mohammadProfile);
+
+        publisherService.updatePublisher(publisher);
+        publisherService.updatePublisher(publisher2);
+
+        // ------------------------------------------------------------------------------------------
+        // 4. Retrieve one book by its ID------------------------------------------------------------
+        // ------------------------------------------------------------------------------------------
         Book findedBook = bookService.findBookById(0L);
         System.out.println(ColorCMD.log("4. Retrieve one book by its ID: [ID 0]" + findedBook));
 
-        // 5. Update some information of the retrieved book (for example: change its price)
+        // ------------------------------------------------------------------------------------------
+        // 5. Update some information of the retrieved book (for example: change its price)----------
+        // ------------------------------------------------------------------------------------------
         findedBook.setPrice(new BigDecimal(2.0));
         System.out.println(ColorCMD.log("""
                 5. Update some information of the retrieved book (for example: change its price)
                 [ID 0 -> price: $2.0]
                 """));
 
-        // 6. Save the changes
+        // ------------------------------------------------------------------------------------------
+        // 6. Save the changes-----------------------------------------------------------------------
+        // ------------------------------------------------------------------------------------------
         bookService.updateBook(findedBook);
         System.out.println(ColorCMD.log("6. Save the changes"));
+        Book findedUpdateBook = bookService.findBookById(0L);
+        System.out.println(ColorCMD.log(findedUpdateBook.toString()));
 
-        // 7. Delete one book
+        // ------------------------------------------------------------------------------------------
+        // 7. Delete one book------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------------------
         bookService.deleteBook(0L);
         System.out.println(ColorCMD.log("7. Delete one book: [ID 0]"));
 
-        // 8. Display the created objects and their relationships (for example: print to console)
+        // ------------------------------------------------------------------------------------------
+        // 8. Display the created objects and their relationships (for example: print to console)----
+        // ------------------------------------------------------------------------------------------
         System.out.println(ColorCMD.log("""
                 8. Display the created objects and their relationships (for example: print to console)
                 """));
 
         List<Book> allBook = bookService.findAllBook();
-        ;
         System.out.println(allBook);
-        // 9. Verify the final database state (by querying and showing results)
+        // ------------------------------------------------------------------------------------------
+        // 9. Verify the final database state (by querying and showing results)----------------------
+        // ------------------------------------------------------------------------------------------
     }
 }

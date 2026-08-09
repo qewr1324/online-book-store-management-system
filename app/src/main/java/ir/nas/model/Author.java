@@ -4,7 +4,6 @@ import java.util.List;
 
 import ir.nas.model.base.BaseModel;
 import ir.nas.model.embeddable.Address;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
