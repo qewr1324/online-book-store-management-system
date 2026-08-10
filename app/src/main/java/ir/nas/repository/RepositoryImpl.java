@@ -68,7 +68,9 @@ public abstract class RepositoryImpl<T extends BaseModel<ID>, ID extends Number>
                 throw new ModelNotFoundException("RepositoryImpl Class Error [update()]: %s Model Not Found!"
                         .formatted(clazz.getSimpleName()));
 
-            return this.updateAllSetter(findedT, t);
+            T setModel = this.updateAllSetter(findedT, t);
+
+            return em.merge(setModel);
         });
     }
 

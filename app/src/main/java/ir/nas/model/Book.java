@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import ir.nas.model.base.BaseModel;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -48,11 +49,11 @@ public class Book extends BaseModel<Long>
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<Author> authors;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Publisher publisher;
 }

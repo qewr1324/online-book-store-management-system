@@ -4,6 +4,7 @@ import java.util.List;
 
 import ir.nas.model.base.BaseModel;
 import ir.nas.model.embeddable.Address;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -61,7 +62,7 @@ public class Author extends BaseModel<Long>
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Publisher publisher;
 
     @ToString.Exclude

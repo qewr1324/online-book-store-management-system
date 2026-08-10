@@ -1,6 +1,7 @@
 package ir.nas.model;
 
 import ir.nas.model.base.BaseModel;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -48,6 +49,6 @@ public class Profile extends BaseModel<Long>
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private Author author;
 }
