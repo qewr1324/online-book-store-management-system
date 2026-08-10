@@ -3,7 +3,123 @@
  */
 package ir.nas;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import ir.nas.model.Author;
+import ir.nas.model.Book;
+import ir.nas.model.Publisher;
+import ir.nas.model.embeddable.Address;
+import ir.nas.repository.author.AuthorRepositoryImpl;
+import ir.nas.repository.book.BookRepositoryImpl;
+import ir.nas.service.AuthorService;
+import ir.nas.service.BookService;
+
 class AppTest
 {
-    
+    private static AuthorRepositoryImpl authorRepositoryImpl;
+    private static BookRepositoryImpl bookRepositoryImpl;
+    private static AuthorService authorService;
+    private static BookService bookService;
+    private static Book exampleBook;
+
+    @BeforeAll
+    public static void setup()
+    {
+        authorRepositoryImpl = new AuthorRepositoryImpl();
+        bookRepositoryImpl = new BookRepositoryImpl();
+        authorService = new AuthorService(authorRepositoryImpl);
+        bookService = new BookService(bookRepositoryImpl);
+        exampleBook = Book.builder()
+                .title("Counter Strike GO")
+                .ISBN("123-456-789-000-0")
+                .price(new BigDecimal(10))
+                // .authors(null)
+                // .publisher(null)
+                .build();
+    }
+
+    @BeforeEach
+    @DisplayName("1. A book can be created correctly")
+    public void shouldCreatedABook()
+    {
+        Book insertedBook = bookService.addBook(exampleBook);
+
+        assertNotNull(insertedBook);
+        assertNotNull(insertedBook.getId());
+    }
+
+    @Test
+    @DisplayName("2. The book contains the expected information")
+    public void shouldBookHasInformation()
+    {
+        Book bookByISBN = bookService.findBookByISBN("123-456-789-000-0");
+
+        assertEquals(bookByISBN.getTitle(), exampleBook.getTitle());
+        assertEquals(bookByISBN.getISBN(), exampleBook.getISBN());
+        assertEquals(bookByISBN.getPrice().doubleValue(), exampleBook.getPrice().doubleValue());
+    }
+
+    @Test
+    @DisplayName("3. Relationships between objects are correctly established")
+    public void shouldBookHasRelationship()
+    {
+        Address address = Address.builder()
+                .country("IRAN")
+                .province("TEHRAN")
+                .city("TEHRAN")
+                .postalCode("IR")
+                .build();
+
+        Author author = Author.builder()
+                .firstName("Amir")
+                .lastName("mohammadi")
+                .age(1377)
+                .phoneNumber("09876543210")
+                .address(address)
+                .publisher(null)
+                .build();
+
+        Author addedAuthor = authorService.addAuthor(author);
+
+        Book bookByISBN = bookService.findBookByISBN("123-456-789-000-0");
+
+        bookByISBN.setAuthors(Arrays.asList(addedAuthor));
+
+       Book updateBook = bookService.updateBook(bookByISBN);
+
+
+       assertNotNull(updateBook.getAuthors());
+    //    String phone = updateBook.getAuthors().getFirst().getPhoneNumber();
+    //    assertEquals(phone, "09876543210");
+    }
+
+    @ParameterizedTest()
+    @CsvSource("123-456-789-000-0")
+    @DisplayName("4. Entities contain valid required information (e.g., non-null ISBN, positive price)")
+    public void shouldBookHasTrueInformation(String ISBN)
+    {
+        Book bookByISBN = bookService.findBookByISBN(ISBN);
+
+        assertNotNull(bookByISBN.getTitle());
+        assertNotNull(bookByISBN.getISBN());
+        assertNotNull(bookByISBN.getPrice());
+
+        assertFalse(bookByISBN.getPrice().doubleValue() < 0);
+
+        // assertTrue(bookByISBN.getPrice().doubleValue() > -1);
+    }
 }
