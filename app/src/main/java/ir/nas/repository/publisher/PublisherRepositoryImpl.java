@@ -71,6 +71,9 @@ public class PublisherRepositoryImpl extends PublisherRepository
         src.getAddress().setCity(target.getAddress().getCity());
         src.getAddress().setPostalCode(target.getAddress().getPostalCode());
 
+        src.setAuthors(target.getAuthors());
+        src.setBooks(target.getBooks());
+
         return src;
     }
 }

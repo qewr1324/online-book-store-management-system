@@ -70,7 +70,9 @@ public abstract class RepositoryImpl<T extends BaseModel<ID>, ID extends Number>
 
             T setModel = this.updateAllSetter(findedT, t);
 
-            return em.merge(setModel);
+            return setModel;
+
+            // return em.merge(setModel);
         });
     }
 

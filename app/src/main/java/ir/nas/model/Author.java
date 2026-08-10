@@ -57,7 +57,7 @@ public class Author extends BaseModel<Long>
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToMany(mappedBy = "authors")
+    @ManyToMany(mappedBy = "authors", cascade = CascadeType.MERGE)
     private List<Book> books;
 
     @ToString.Exclude

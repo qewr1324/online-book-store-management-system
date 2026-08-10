@@ -68,6 +68,10 @@ public class AuthorRepositoryImpl extends AuthorRepository
         src.getAddress().setCity(target.getAddress().getCity());
         src.getAddress().setPostalCode(target.getAddress().getPostalCode());
 
+        src.setBooks(target.getBooks());
+        src.setPublisher(target.getPublisher());
+        src.setProfile(target.getProfile());
+
         return src;
     }
 }

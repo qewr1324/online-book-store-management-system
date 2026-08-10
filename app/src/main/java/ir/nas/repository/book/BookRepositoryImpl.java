@@ -47,6 +47,9 @@ public final class BookRepositoryImpl extends BookRepository
         src.setISBN(target.getISBN());
         src.setPrice(target.getPrice());
 
+        src.setAuthors(target.getAuthors());
+        src.setPublisher(target.getPublisher());
+
         return src;
     }
 }

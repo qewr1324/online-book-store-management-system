@@ -6,6 +6,7 @@ import java.util.List;
 import ir.nas.model.base.BaseModel;
 import ir.nas.model.embeddable.Address;
 import ir.nas.model.enums.CompanyType;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -64,11 +65,11 @@ public class Publisher extends BaseModel<Long>
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "publisher")
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.MERGE)
     private List<Book> books;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "publisher")
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.MERGE)
     private List<Author> authors;
 }

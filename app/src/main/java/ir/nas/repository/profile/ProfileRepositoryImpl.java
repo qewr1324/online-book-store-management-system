@@ -48,6 +48,8 @@ public final class ProfileRepositoryImpl extends ProfileRepository
         src.setUsername(target.getUsername());
         src.setPassword(target.getPassword());
 
+        src.setAuthor(target.getAuthor());
+
         return src;
     }
 }
