@@ -31,7 +31,80 @@ gradle run
 # Project Structure
 
 ```text
-
+online-book-store-management-system
+├─ README.md
+├─ app
+│  └─ src
+│     ├─ main
+│     │  ├─ java
+│     │  │  └─ ir
+│     │  │     └─ nas
+│     │  │        ├─ App.java
+│     │  │        ├─ Examples.java
+│     │  │        ├─ exception
+│     │  │        │  ├─ BusinessException.java
+│     │  │        │  ├─ db
+│     │  │        │  │  └─ DBConnectionException.java
+│     │  │        │  ├─ repository
+│     │  │        │  │  └─ ModelNotFoundException.java
+│     │  │        │  └─ util
+│     │  │        │     └─ InvalidInputException.java
+│     │  │        ├─ model
+│     │  │        │  ├─ Author.java
+│     │  │        │  ├─ Book.java
+│     │  │        │  ├─ Profile.java
+│     │  │        │  ├─ Publisher.java
+│     │  │        │  ├─ base
+│     │  │        │  │  └─ BaseModel.java
+│     │  │        │  ├─ embeddable
+│     │  │        │  │  └─ Address.java
+│     │  │        │  └─ enums
+│     │  │        │     └─ CompanyType.java
+│     │  │        ├─ repository
+│     │  │        │  ├─ Repository.java
+│     │  │        │  ├─ RepositoryImpl.java
+│     │  │        │  ├─ author
+│     │  │        │  │  ├─ AuthorRepository.java
+│     │  │        │  │  └─ AuthorRepositoryImpl.java
+│     │  │        │  ├─ book
+│     │  │        │  │  ├─ BookRepository.java
+│     │  │        │  │  └─ BookRepositoryImpl.java
+│     │  │        │  ├─ profile
+│     │  │        │  │  ├─ ProfileRepository.java
+│     │  │        │  │  └─ ProfileRepositoryImpl.java
+│     │  │        │  └─ publisher
+│     │  │        │     ├─ PublisherRepository.java
+│     │  │        │     └─ PublisherRepositoryImpl.java
+│     │  │        ├─ service
+│     │  │        │  ├─ AuthorService.java
+│     │  │        │  ├─ BookService.java
+│     │  │        │  ├─ ProfileService.java
+│     │  │        │  └─ PublisherService.java
+│     │  │        └─ util
+│     │  │           ├─ ColorCMD.java
+│     │  │           ├─ HibernateUtil.java
+│     │  │           └─ Validation.java
+│     │  └─ resources
+│     │     ├─ META-INF
+│     │     │  └─ persistence.xml
+│     │     └─ db
+│     │        └─ db.sql
+│     └─ test
+│        ├─ java
+│        │  └─ ir
+│        │     └─ nas
+│        │        └─ AppTest.java
+│        └─ resources
+│           └─ META-INF
+│              └─ persistence.xml
+├─ gradle
+│  ├─ libs.versions.toml
+│  └─ wrapper
+│     ├─ gradle-wrapper.jar
+│     └─ gradle-wrapper.properties
+├─ gradle.properties
+├─ gradlew
+└─ gradlew.bat
 ```
 
 > ---
