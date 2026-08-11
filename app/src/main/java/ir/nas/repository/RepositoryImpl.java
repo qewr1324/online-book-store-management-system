@@ -7,6 +7,17 @@ import ir.nas.exception.repository.ModelNotFoundException;
 import ir.nas.model.base.BaseModel;
 import ir.nas.util.HibernateUtil;
 
+/**
+ * 
+ * RepositoryImpl
+ * 
+ * <p>Generic implementation for crud operations.
+ * Suitable for use with any repository class.</p>
+ * 
+ * @param <T>
+ * @param <ID>
+ */
+
 public abstract class RepositoryImpl<T extends BaseModel<ID>, ID extends Number> implements Repository<T, ID>
 {
     private final Class<T> clazz;
