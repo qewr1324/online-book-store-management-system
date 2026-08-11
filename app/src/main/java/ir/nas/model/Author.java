@@ -24,6 +24,39 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * Author
+ * 
+ * <p>A class to build the author model. With builder functionality
+ * for easier and more readable class construction.</p>
+ * 
+ * <p><strong>Example:</strong>
+ * <pre>
+ * {@code Author author = Author.builder()
+ *                      .id(Long)
+ *                      .firstName(String)
+ *                      .lastName(String)
+ *                      .phoneNumber(String)
+ *                      .age(int)
+ *                      .build();
+ * }
+ * </pre>
+ * </p>
+ * @implNote It has three relationships: <pre>
+ * {@code 
+ * @ManyToMany(mappedBy = "authors", cascade = CascadeType.MERGE)
+ * List<Book> books;
+ * 
+ * @ManyToOne(cascade = CascadeType.MERGE)
+ * Publisher publisher;
+ * 
+ * @OneToOne(mappedBy = "author")
+ * Profile profile;}</pre>
+ * @since 1405
+ * @author GhurbeSABZI
+ * @version 1.0.0
+ */
+
 @Getter
 @Setter
 @AllArgsConstructor

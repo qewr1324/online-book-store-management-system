@@ -26,6 +26,40 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * Publisher
+ * 
+ * <p>A class to build the Publisher model. With builder functionality
+ * for easier and more readable class construction.</p>
+ * 
+ * <p><strong>Example:</strong>
+ * <pre>
+ * {@code Publisher author = Publisher.builder()
+ *                      .id(Long)
+ *                      .companyName(String)
+ *                      .email(String)
+ *                      .nationalId(String)
+ *                      .companyType(CompanyType)
+ *                      .registerDate(LocalDate)
+ *                      .website(String)
+ *                      .address(Address)
+ *                      .build();
+ * }
+ * </pre>
+ * </p>
+ * @implNote It has three relationships: <pre>
+ * {@code 
+ * @OneToMany(mappedBy = "publisher", cascade = CascadeType.MERGE 
+ * private List<Book> books 
+ * 
+ * @OneToMany(mappedBy = "publisher", cascade = CascadeType.MERGE 
+ * private List<Author> authors;
+ * }</pre>
+ * @since 1405
+ * @author GhurbeSABZI
+ * @version 1.0.0
+ */
+
 @Getter
 @Setter
 @AllArgsConstructor

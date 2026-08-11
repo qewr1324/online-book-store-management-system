@@ -14,6 +14,23 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * BaseModel
+ * 
+ * <p>This is a basemodel class to determine the id type of
+ * other models and to specify generic output in interfaces.</p>
+ * 
+ * <p><strong>Example:</strong>
+ * <pre>
+ * {@code public class Example extends BaseModel<Long> {...}}
+ * </pre>
+ * </p>
+ * @param <ID>
+ * @since 1405
+ * @author GhurbeSABZI
+ * @version 2.0.0
+ */
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -31,7 +48,7 @@ public abstract class BaseModel<ID extends Number>
     private LocalDate updateAt;
 
     public abstract void setId(ID id);
-    
+
     public abstract ID getId();
 
     @PrePersist

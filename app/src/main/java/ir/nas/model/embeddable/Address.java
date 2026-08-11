@@ -12,6 +12,24 @@ import lombok.ToString;
 
 /**
  * Address
+ * 
+ * <p>The address class is a non-entity class
+ * and is added to models as an embedded class.</p>
+ * 
+ * <p><strong>Example:</strong>
+ * <pre>
+ * {@code public class Example extends BaseModel<Long> {
+ *      @Embedded
+ *      private Address address;
+ * 
+ *      // Other Properties ...
+ * }
+ * }
+ * </pre>
+ * </p>
+ * @since 1405
+ * @author GhurbeSABZI
+ * @version 1.0.0
  */
 
 @Getter

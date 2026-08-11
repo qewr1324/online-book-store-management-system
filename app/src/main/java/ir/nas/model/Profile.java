@@ -19,6 +19,35 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+/**
+ * Profile
+ * 
+ * <p>A class to build the Profile model. With builder functionality
+ * for easier and more readable class construction.</p>
+ * 
+ * <p><strong>Example:</strong>
+ * <pre>
+ * {@code Profile author = Profile.builder()
+ *                      .id(Long)
+ *                      .biography(String)
+ *                      .email(String)
+ *                      .username(String)
+ *                      .password(String)
+ *                      .build();
+ * 
+ * }
+ * </pre>
+ * </p>
+ * @implNote It has three relationships: <pre>
+ * {@code 
+ *  @OneToOne(cascade = CascadeType.MERGE)
+ *  private Author author;
+ * }</pre>
+ * @since 1405
+ * @author GhurbeSABZI
+ * @version 1.0.0
+ */
+
 @Getter
 @Setter
 @AllArgsConstructor
